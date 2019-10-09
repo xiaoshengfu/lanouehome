@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huishoucat.manager.mapper.TWasteOrderItemMapper">
+	<resultMap id="BaseResultMap" type="com.huishoucat.manager.pojo.TWasteOrderItem">
+		<id column="order_item_id" property="orderItemId" jdbcType="BIGINT" />
+		<result column="waste_order_id" property="wasteOrderId"
+			jdbcType="BIGINT" />
+		<result column="waste_id" property="wasteId" jdbcType="BIGINT" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="unit_point" property="unitPoint" jdbcType="BIGINT" />
+		<result column="attribute_price" property="attributePrice"
+			jdbcType="BIGINT" />
+		<result column="estimate_unit_price" property="estimateUnitPrice"
+			jdbcType="BIGINT" />
+		<result column="real_unit_price" property="realUnitPrice"
+			jdbcType="BIGINT" />
+		<result column="estimate_num" property="estimateNum" jdbcType="INTEGER" />
+		<result column="real_num" property="realNum" jdbcType="INTEGER" />
+		<result column="unit" property="unit" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		order_item_id, waste_order_id, waste_id, description,
+		unit_point, attribute_price,
+		estimate_unit_price, real_unit_price,
+		estimate_num, real_num, unit,
+		create_time,
+		update_time
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.huishoucat.manager.pojo.TWasteOrderItemExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from t_waste_order_item
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_waste_order_item
+		where order_item_id =
+		#{orderItemId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		t_waste_order_item
+		where order_item_id = #{orderItemId,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.huishoucat.manager.pojo.TWasteOrderItemExample">
+		delete from t_waste_order_item
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.huishoucat.manager.pojo.TWasteOrderItem">
+		insert into t_waste_order_item
+		(order_item_id, waste_order_id,
+		waste_id,
+		description, unit_point,
+		attribute_price,
+		estimate_unit_price, real_unit_price, estimate_num,
+		real_num, unit, create_time,
+		update_time)
+		values
+		(#{orderItemId,jdbcType=BIGINT}, #{wasteOrderId,jdbcType=BIGINT},
+		#{wasteId,jdbcType=BIGINT},
+		#{description,jdbcType=VARCHAR},
+		#{unitPoint,jdbcType=BIGINT}, #{attributePrice,jdbcType=BIGINT},
+		#{estimateUnitPrice,jdbcType=BIGINT},
+		#{realUnitPrice,jdbcType=BIGINT}, #{estimateNum,jdbcType=INTEGER},
+		#{realNum,jdbcType=INTEGER}, #{unit,jdbcType=INTEGER},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.huishoucat.manager.pojo.TWasteOrderItem">
+		<selectKey keyProperty="orderItemId" resultType="long"
+			order="AFTER">
+			select
+			last_insert_id()
+		</selectKey>
+		insert into t_waste_order_item
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="orderItemId != null">
+				order_item_id,
+			</if>
+			<if test="wasteOrderId != null">
+				waste_order_id,
+			</if>
+			<if test="wasteId != null">
+				waste_id,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="unitPoint != null">
+				unit_point,
+			</if>
+			<if test="attributePrice != null">
+				attribute_price,
+			</if>
+			<if test="estimateUnitPrice != null">
+				estimate_unit_price,
+			</if>
+			<if test="realUnitPrice != null">
+				real_unit_price,
+			</if>
+			<if test="estimateNum != null">
+				estimate_num,
+			</if>
+			<if test="realNum != null">
+				real_num,
+			</if>
+			<if test="unit != null">
+				unit,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="orderItemId != null">
+				#{orderItemId,jdbcType=BIGINT},
+			</if>
+			<if test="wasteOrderId != null">
+				#{wasteOrderId,jdbcType=BIGINT},
+			</if>
+			<if test="wasteId != null">
+				#{wasteId,jdbcType=BIGINT},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="unitPoint != null">
+				#{unitPoint,jdbcType=BIGINT},
+			</if>
+			<if test="attributePrice != null">
+				#{attributePrice,jdbcType=BIGINT},
+			</if>
+			<if test="estimateUnitPrice != null">
+				#{estimateUnitPrice,jdbcType=BIGINT},
+			</if>
+			<if test="realUnitPrice != null">
+				#{realUnitPrice,jdbcType=BIGINT},
+			</if>
+			<if test="estimateNum != null">
+				#{estimateNum,jdbcType=INTEGER},
+			</if>
+			<if test="realNum != null">
+				#{realNum,jdbcType=INTEGER},
+			</if>
+			<if test="unit != null">
+				#{unit,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.huishoucat.manager.pojo.TWasteOrderItemExample"
+		resultType="java.lang.Integer">
+		select count(*) from t_waste_order_item
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update t_waste_order_item
+		<set>
+			<if test="record.orderItemId != null">
+				order_item_id = #{record.orderItemId,jdbcType=BIGINT},
+			</if>
+			<if test="record.wasteOrderId != null">
+				waste_order_id = #{record.wasteOrderId,jdbcType=BIGINT},
+			</if>
+			<if test="record.wasteId != null">
+				waste_id = #{record.wasteId,jdbcType=BIGINT},
+			</if>
+			<if test="record.description != null">
+				description = #{record.description,jdbcType=VARCHAR},
+			</if>
+			<if test="record.unitPoint != null">
+				unit_point = #{record.unitPoint,jdbcType=BIGINT},
+			</if>
+			<if test="record.attributePrice != null">
+				attribute_price =
+				#{record.attributePrice,jdbcType=BIGINT},
+			</if>
+			<if test="record.estimateUnitPrice != null">
+				estimate_unit_price =
+				#{record.estimateUnitPrice,jdbcType=BIGINT},
+			</if>
+			<if test="record.realUnitPrice != null">
+				real_unit_price =
+				#{record.realUnitPrice,jdbcType=BIGINT},
+			</if>
+			<if test="record.estimateNum != null">
+				estimate_num = #{record.estimateNum,jdbcType=INTEGER},
+			</if>
+			<if test="record.realNum != null">
+				real_num = #{record.realNum,jdbcType=INTEGER},
+			</if>
+			<if test="record.unit != null">
+				unit = #{record.unit,jdbcType=INTEGER},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update t_waste_order_item
+		set order_item_id =
+		#{record.orderItemId,jdbcType=BIGINT},
+		waste_order_id =
+		#{record.wasteOrderId,jdbcType=BIGINT},
+		waste_id =
+		#{record.wasteId,jdbcType=BIGINT},
+		description =
+		#{record.description,jdbcType=VARCHAR},
+		unit_point =
+		#{record.unitPoint,jdbcType=BIGINT},
+		attribute_price =
+		#{record.attributePrice,jdbcType=BIGINT},
+		estimate_unit_price =
+		#{record.estimateUnitPrice,jdbcType=BIGINT},
+		real_unit_price =
+		#{record.realUnitPrice,jdbcType=BIGINT},
+		estimate_num =
+		#{record.estimateNum,jdbcType=INTEGER},
+		real_num =
+		#{record.realNum,jdbcType=INTEGER},
+		unit =
+		#{record.unit,jdbcType=INTEGER},
+		create_time =
+		#{record.createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.huishoucat.manager.pojo.TWasteOrderItem">
+		update t_waste_order_item
+		<set>
+			<if test="wasteOrderId != null">
+				waste_order_id = #{wasteOrderId,jdbcType=BIGINT},
+			</if>
+			<if test="wasteId != null">
+				waste_id = #{wasteId,jdbcType=BIGINT},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="unitPoint != null">
+				unit_point = #{unitPoint,jdbcType=BIGINT},
+			</if>
+			<if test="attributePrice != null">
+				attribute_price = #{attributePrice,jdbcType=BIGINT},
+			</if>
+			<if test="estimateUnitPrice != null">
+				estimate_unit_price =
+				#{estimateUnitPrice,jdbcType=BIGINT},
+			</if>
+			<if test="realUnitPrice != null">
+				real_unit_price = #{realUnitPrice,jdbcType=BIGINT},
+			</if>
+			<if test="estimateNum != null">
+				estimate_num = #{estimateNum,jdbcType=INTEGER},
+			</if>
+			<if test="realNum != null">
+				real_num = #{realNum,jdbcType=INTEGER},
+			</if>
+			<if test="unit != null">
+				unit = #{unit,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where order_item_id = #{orderItemId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.huishoucat.manager.pojo.TWasteOrderItem">
+		update
+		t_waste_order_item
+		set waste_order_id =
+		#{wasteOrderId,jdbcType=BIGINT},
+		waste_id = #{wasteId,jdbcType=BIGINT},
+		description = #{description,jdbcType=VARCHAR},
+		unit_point =
+		#{unitPoint,jdbcType=BIGINT},
+		attribute_price =
+		#{attributePrice,jdbcType=BIGINT},
+		estimate_unit_price =
+		#{estimateUnitPrice,jdbcType=BIGINT},
+		real_unit_price =
+		#{realUnitPrice,jdbcType=BIGINT},
+		estimate_num =
+		#{estimateNum,jdbcType=INTEGER},
+		real_num =
+		#{realNum,jdbcType=INTEGER},
+		unit = #{unit,jdbcType=INTEGER},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP}
+		where order_item_id =
+		#{orderItemId,jdbcType=BIGINT}
+	</update>
+</mapper>

@@ -1,0 +1,156 @@
+.ios .tabbar-labels .tab-link:not(.tab-link-active) .icon-ios-fill {
+  display: none;
+}
+.ios .tabbar-labels .tab-link.tab-link-active .icon:not(.icon-ios-fill) {
+  display: none;
+}
+
+.waste-image {
+	width: 55px;
+	height: 55px;
+	margin: 0 auto;
+}
+
+.waste-item {
+	width: 55px;
+	background-color: #FFFFFF;
+	padding: 3px 10px;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	display: inline-block;
+	text-align: center;
+	margin: 0;
+	font-family: Arial, Microsoft, sans-serif;
+	list-style: none;
+}
+
+.waste-item .waste-name {
+	color: #000000;
+	font-size: 12px;
+	white-space: nowrap;
+	text-align: center;
+}
+
+.waste-label {
+	height: 25px;
+	color: #000000;
+	font-size: 12px;
+	white-space: nowrap;
+	text-align: center;
+	color: #000000;
+}
+
+.waste-image2 {
+	width: 45px;
+	height: 45px;
+	margin: 0 auto;
+}
+
+.waste-item2 {
+	background-color: #FFFFFF;
+	padding: 7px 6px;
+	position: relative;
+	width: 30px;
+	margin: 12px 15px;
+	display: block;
+	border: 1px solid #ccc;
+}
+
+.waste-image3 {
+	width: 70px;
+	height: 70px;
+	border: 1px solid #007aff;
+	border-radius: 6px;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.footer {
+	height: 3.9rem;
+	width: 100%;
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+}
+
+.footer p {
+	margin-left: 12px;
+	margin-right: 12px;
+}
+
+.address-body {
+	padding-bottom: 1.2rem;
+}
+
+.item_foot {
+	position: absolute;
+	bottom: 10px;
+}
+
+.denglutm {
+	opacity:0.5;
+}
+
+.zhucetm{
+	opacity:0.5;
+}
+
+.add-basket{
+	opacity:0.5;
+}
+
+.tixian_display {
+	display: none;
+}
+
+.demo-swiper .swiper-slide {
+	font-size: 25px;
+	font-weight: 300;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #fff;
+	color: #000;
+}
+
+.demo-swiper .swiper-slide {
+	box-sizing: border-box;
+	border: 1px solid #ddd;
+	background: #fff;
+}
+
+.demo-swiper {
+	margin: 0px 0 35px;
+	font-size: 18px;
+	height: 65%;
+}
+
+.demo-swiper.demo-swiper-auto .swiper-slide {
+	width: 85%;
+}
+
+.demo-swiper.demo-swiper-auto .swiper-slide:nth-child(2n) {
+	width: 70%;
+}
+
+.demo-swiper.demo-swiper-auto .swiper-slide:nth-child(3n) {
+	width: 30%;
+}
+
+.module-adds {
+	display: flex;
+	background-color: #FFF;
+	line-height: 30px;
+	padding: 0 10px;
+	font-size: 12px;
+	color: #999;
+	font-weight: lighter;
+}
+
+.description img {
+	display: block;
+	margin: 0 auto;
+	vertical-align: top;
+	max-width: 100%;
+}

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huishoucat.manager.mapper.TUserPointsDetailsMapper">
+	<resultMap id="BaseResultMap"
+		type="com.huishoucat.manager.pojo.TUserPointsDetails">
+		<id column="points_detail_id" property="pointsDetailId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="source" property="source" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="num" property="num" jdbcType="BIGINT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		points_detail_id, user_id, source, type, num, create_time
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.huishoucat.manager.pojo.TUserPointsDetailsExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from t_user_points_details
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_user_points_details
+		where points_detail_id =
+		#{pointsDetailId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		t_user_points_details
+		where points_detail_id =
+		#{pointsDetailId,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="com.huishoucat.manager.pojo.TUserPointsDetailsExample">
+		delete from t_user_points_details
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.huishoucat.manager.pojo.TUserPointsDetails">
+		insert into
+		t_user_points_details (points_detail_id, user_id, source,
+		type, num,
+		create_time
+		)
+		values (#{pointsDetailId,jdbcType=BIGINT},
+		#{userId,jdbcType=BIGINT},
+		#{source,jdbcType=INTEGER},
+		#{type,jdbcType=INTEGER}, #{num,jdbcType=BIGINT},
+		#{createTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.huishoucat.manager.pojo.TUserPointsDetails">
+		<selectKey keyProperty="pointsDetailId" resultType="long"
+			order="AFTER">
+			select
+			last_insert_id()
+		</selectKey>
+		insert into t_user_points_details
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="pointsDetailId != null">
+				points_detail_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="source != null">
+				source,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="num != null">
+				num,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="pointsDetailId != null">
+				#{pointsDetailId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="source != null">
+				#{source,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="num != null">
+				#{num,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="com.huishoucat.manager.pojo.TUserPointsDetailsExample"
+		resultType="java.lang.Integer">
+		select count(*) from t_user_points_details
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update t_user_points_details
+		<set>
+			<if test="record.pointsDetailId != null">
+				points_detail_id =
+				#{record.pointsDetailId,jdbcType=BIGINT},
+			</if>
+			<if test="record.userId != null">
+				user_id = #{record.userId,jdbcType=BIGINT},
+			</if>
+			<if test="record.source != null">
+				source = #{record.source,jdbcType=INTEGER},
+			</if>
+			<if test="record.type != null">
+				type = #{record.type,jdbcType=INTEGER},
+			</if>
+			<if test="record.num != null">
+				num = #{record.num,jdbcType=BIGINT},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update t_user_points_details
+		set points_detail_id =
+		#{record.pointsDetailId,jdbcType=BIGINT},
+		user_id =
+		#{record.userId,jdbcType=BIGINT},
+		source =
+		#{record.source,jdbcType=INTEGER},
+		type =
+		#{record.type,jdbcType=INTEGER},
+		num = #{record.num,jdbcType=BIGINT},
+		create_time = #{record.createTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.huishoucat.manager.pojo.TUserPointsDetails">
+		update t_user_points_details
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="source != null">
+				source = #{source,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="num != null">
+				num = #{num,jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where points_detail_id = #{pointsDetailId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.huishoucat.manager.pojo.TUserPointsDetails">
+		update
+		t_user_points_details
+		set user_id = #{userId,jdbcType=BIGINT},
+		source =
+		#{source,jdbcType=INTEGER},
+		type = #{type,jdbcType=INTEGER},
+		num =
+		#{num,jdbcType=BIGINT},
+		create_time = #{createTime,jdbcType=TIMESTAMP}
+		where points_detail_id = #{pointsDetailId,jdbcType=BIGINT}
+	</update>
+</mapper>

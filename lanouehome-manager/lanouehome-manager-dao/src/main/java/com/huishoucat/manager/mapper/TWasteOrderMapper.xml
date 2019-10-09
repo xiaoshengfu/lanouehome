@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huishoucat.manager.mapper.TWasteOrderMapper">
+	<resultMap id="BaseResultMap" type="com.huishoucat.manager.pojo.TWasteOrder">
+		<id column="waste_order_id" property="wasteOrderId" jdbcType="BIGINT" />
+		<result column="user_id" property="userId" jdbcType="BIGINT" />
+		<result column="recycler_id" property="recyclerId" jdbcType="BIGINT" />
+		<result column="reserve_time" property="reserveTime" jdbcType="TIMESTAMP" />
+		<result column="user_address_id" property="userAddressId"
+			jdbcType="BIGINT" />
+		<result column="message" property="message" jdbcType="VARCHAR" />
+		<result column="estimate_price" property="estimatePrice"
+			jdbcType="BIGINT" />
+		<result column="real_price" property="realPrice" jdbcType="BIGINT" />
+		<result column="estimate_point" property="estimatePoint"
+			jdbcType="BIGINT" />
+		<result column="real_point" property="realPoint" jdbcType="BIGINT" />
+		<result column="state" property="state" jdbcType="INTEGER" />
+		<result column="confirm_time" property="confirmTime" jdbcType="TIMESTAMP" />
+		<result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+		<result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="invalid_time" property="invalidTime" jdbcType="TIMESTAMP" />
+		<result column="invalid_reason" property="invalidReason"
+			jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		waste_order_id, user_id, recycler_id, reserve_time,
+		user_address_id, message,
+		estimate_price,
+		real_price, estimate_point,
+		real_point, state, confirm_time, pay_time, end_time,
+		invalid_time,
+		invalid_reason, is_deleted, create_time, update_time
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.huishoucat.manager.pojo.TWasteOrderExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from t_waste_order
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_waste_order
+		where waste_order_id =
+		#{wasteOrderId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		t_waste_order
+		where waste_order_id = #{wasteOrderId,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.huishoucat.manager.pojo.TWasteOrderExample">
+		delete from t_waste_order
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.huishoucat.manager.pojo.TWasteOrder">
+		insert into t_waste_order
+		(waste_order_id, user_id, recycler_id,
+		reserve_time, user_address_id,
+		message,
+		estimate_price, real_price, estimate_point,
+		real_point, state,
+		confirm_time,
+		pay_time, end_time, invalid_time,
+		invalid_reason,
+		is_deleted, create_time,
+		update_time)
+		values
+		(#{wasteOrderId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT},
+		#{recyclerId,jdbcType=BIGINT},
+		#{reserveTime,jdbcType=TIMESTAMP},
+		#{userAddressId,jdbcType=BIGINT}, #{message,jdbcType=VARCHAR},
+		#{estimatePrice,jdbcType=BIGINT}, #{realPrice,jdbcType=BIGINT},
+		#{estimatePoint,jdbcType=BIGINT},
+		#{realPoint,jdbcType=BIGINT},
+		#{state,jdbcType=INTEGER}, #{confirmTime,jdbcType=TIMESTAMP},
+		#{payTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+		#{invalidTime,jdbcType=TIMESTAMP},
+		#{invalidReason,jdbcType=VARCHAR},
+		#{isDeleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.huishoucat.manager.pojo.TWasteOrder">
+		<selectKey keyProperty="wasteOrderId" resultType="long"
+			order="AFTER">
+			select
+			last_insert_id()
+		</selectKey>
+		insert into t_waste_order
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="wasteOrderId != null">
+				waste_order_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="recyclerId != null">
+				recycler_id,
+			</if>
+			<if test="reserveTime != null">
+				reserve_time,
+			</if>
+			<if test="userAddressId != null">
+				user_address_id,
+			</if>
+			<if test="message != null">
+				message,
+			</if>
+			<if test="estimatePrice != null">
+				estimate_price,
+			</if>
+			<if test="realPrice != null">
+				real_price,
+			</if>
+			<if test="estimatePoint != null">
+				estimate_point,
+			</if>
+			<if test="realPoint != null">
+				real_point,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+			<if test="confirmTime != null">
+				confirm_time,
+			</if>
+			<if test="payTime != null">
+				pay_time,
+			</if>
+			<if test="endTime != null">
+				end_time,
+			</if>
+			<if test="invalidTime != null">
+				invalid_time,
+			</if>
+			<if test="invalidReason != null">
+				invalid_reason,
+			</if>
+			<if test="isDeleted != null">
+				is_deleted,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="wasteOrderId != null">
+				#{wasteOrderId,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="recyclerId != null">
+				#{recyclerId,jdbcType=BIGINT},
+			</if>
+			<if test="reserveTime != null">
+				#{reserveTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userAddressId != null">
+				#{userAddressId,jdbcType=BIGINT},
+			</if>
+			<if test="message != null">
+				#{message,jdbcType=VARCHAR},
+			</if>
+			<if test="estimatePrice != null">
+				#{estimatePrice,jdbcType=BIGINT},
+			</if>
+			<if test="realPrice != null">
+				#{realPrice,jdbcType=BIGINT},
+			</if>
+			<if test="estimatePoint != null">
+				#{estimatePoint,jdbcType=BIGINT},
+			</if>
+			<if test="realPoint != null">
+				#{realPoint,jdbcType=BIGINT},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="confirmTime != null">
+				#{confirmTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payTime != null">
+				#{payTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="invalidTime != null">
+				#{invalidTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="invalidReason != null">
+				#{invalidReason,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted,jdbcType=BIT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.huishoucat.manager.pojo.TWasteOrderExample"
+		resultType="java.lang.Integer">
+		select count(*) from t_waste_order
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update t_waste_order
+		<set>
+			<if test="record.wasteOrderId != null">
+				waste_order_id = #{record.wasteOrderId,jdbcType=BIGINT},
+			</if>
+			<if test="record.userId != null">
+				user_id = #{record.userId,jdbcType=BIGINT},
+			</if>
+			<if test="record.recyclerId != null">
+				recycler_id = #{record.recyclerId,jdbcType=BIGINT},
+			</if>
+			<if test="record.reserveTime != null">
+				reserve_time = #{record.reserveTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.userAddressId != null">
+				user_address_id =
+				#{record.userAddressId,jdbcType=BIGINT},
+			</if>
+			<if test="record.message != null">
+				message = #{record.message,jdbcType=VARCHAR},
+			</if>
+			<if test="record.estimatePrice != null">
+				estimate_price = #{record.estimatePrice,jdbcType=BIGINT},
+			</if>
+			<if test="record.realPrice != null">
+				real_price = #{record.realPrice,jdbcType=BIGINT},
+			</if>
+			<if test="record.estimatePoint != null">
+				estimate_point = #{record.estimatePoint,jdbcType=BIGINT},
+			</if>
+			<if test="record.realPoint != null">
+				real_point = #{record.realPoint,jdbcType=BIGINT},
+			</if>
+			<if test="record.state != null">
+				state = #{record.state,jdbcType=INTEGER},
+			</if>
+			<if test="record.confirmTime != null">
+				confirm_time = #{record.confirmTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.payTime != null">
+				pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.endTime != null">
+				end_time = #{record.endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.invalidTime != null">
+				invalid_time = #{record.invalidTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.invalidReason != null">
+				invalid_reason =
+				#{record.invalidReason,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isDeleted != null">
+				is_deleted = #{record.isDeleted,jdbcType=BIT},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update t_waste_order
+		set waste_order_id =
+		#{record.wasteOrderId,jdbcType=BIGINT},
+		user_id =
+		#{record.userId,jdbcType=BIGINT},
+		recycler_id =
+		#{record.recyclerId,jdbcType=BIGINT},
+		reserve_time =
+		#{record.reserveTime,jdbcType=TIMESTAMP},
+		user_address_id =
+		#{record.userAddressId,jdbcType=BIGINT},
+		message =
+		#{record.message,jdbcType=VARCHAR},
+		estimate_price =
+		#{record.estimatePrice,jdbcType=BIGINT},
+		real_price =
+		#{record.realPrice,jdbcType=BIGINT},
+		estimate_point =
+		#{record.estimatePoint,jdbcType=BIGINT},
+		real_point =
+		#{record.realPoint,jdbcType=BIGINT},
+		state =
+		#{record.state,jdbcType=INTEGER},
+		confirm_time =
+		#{record.confirmTime,jdbcType=TIMESTAMP},
+		pay_time =
+		#{record.payTime,jdbcType=TIMESTAMP},
+		end_time =
+		#{record.endTime,jdbcType=TIMESTAMP},
+		invalid_time =
+		#{record.invalidTime,jdbcType=TIMESTAMP},
+		invalid_reason =
+		#{record.invalidReason,jdbcType=VARCHAR},
+		is_deleted =
+		#{record.isDeleted,jdbcType=BIT},
+		create_time =
+		#{record.createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.huishoucat.manager.pojo.TWasteOrder">
+		update t_waste_order
+		<set>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="recyclerId != null">
+				recycler_id = #{recyclerId,jdbcType=BIGINT},
+			</if>
+			<if test="reserveTime != null">
+				reserve_time = #{reserveTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userAddressId != null">
+				user_address_id = #{userAddressId,jdbcType=BIGINT},
+			</if>
+			<if test="message != null">
+				message = #{message,jdbcType=VARCHAR},
+			</if>
+			<if test="estimatePrice != null">
+				estimate_price = #{estimatePrice,jdbcType=BIGINT},
+			</if>
+			<if test="realPrice != null">
+				real_price = #{realPrice,jdbcType=BIGINT},
+			</if>
+			<if test="estimatePoint != null">
+				estimate_point = #{estimatePoint,jdbcType=BIGINT},
+			</if>
+			<if test="realPoint != null">
+				real_point = #{realPoint,jdbcType=BIGINT},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="confirmTime != null">
+				confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="payTime != null">
+				pay_time = #{payTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				end_time = #{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="invalidTime != null">
+				invalid_time = #{invalidTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="invalidReason != null">
+				invalid_reason = #{invalidReason,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				is_deleted = #{isDeleted,jdbcType=BIT},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where waste_order_id = #{wasteOrderId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.huishoucat.manager.pojo.TWasteOrder">
+		update
+		t_waste_order
+		set user_id = #{userId,jdbcType=BIGINT},
+		recycler_id =
+		#{recyclerId,jdbcType=BIGINT},
+		reserve_time =
+		#{reserveTime,jdbcType=TIMESTAMP},
+		user_address_id =
+		#{userAddressId,jdbcType=BIGINT},
+		message =
+		#{message,jdbcType=VARCHAR},
+		estimate_price =
+		#{estimatePrice,jdbcType=BIGINT},
+		real_price =
+		#{realPrice,jdbcType=BIGINT},
+		estimate_point =
+		#{estimatePoint,jdbcType=BIGINT},
+		real_point =
+		#{realPoint,jdbcType=BIGINT},
+		state = #{state,jdbcType=INTEGER},
+		confirm_time = #{confirmTime,jdbcType=TIMESTAMP},
+		pay_time =
+		#{payTime,jdbcType=TIMESTAMP},
+		end_time =
+		#{endTime,jdbcType=TIMESTAMP},
+		invalid_time =
+		#{invalidTime,jdbcType=TIMESTAMP},
+		invalid_reason =
+		#{invalidReason,jdbcType=VARCHAR},
+		is_deleted =
+		#{isDeleted,jdbcType=BIT},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP}
+		where waste_order_id =
+		#{wasteOrderId,jdbcType=BIGINT}
+	</update>
+</mapper>

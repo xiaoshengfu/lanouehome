@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huishoucat.manager.mapper.TRelationRecyclerDistrictMapper" >
+  <resultMap id="BaseResultMap" type="com.huishoucat.manager.pojo.TRelationRecyclerDistrict" >
+    <id column="district_id" property="districtId" jdbcType="BIGINT" />
+    <result column="recycler_id" property="recyclerId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    district_id, recycler_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.huishoucat.manager.pojo.TRelationRecyclerDistrictExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_relation_recycler_district
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_relation_recycler_district
+    where district_id = #{districtId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_relation_recycler_district
+    where district_id = #{districtId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.huishoucat.manager.pojo.TRelationRecyclerDistrictExample" >
+    delete from t_relation_recycler_district
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.huishoucat.manager.pojo.TRelationRecyclerDistrict" >
+    insert into t_relation_recycler_district (district_id, recycler_id)
+    values (#{districtId,jdbcType=BIGINT}, #{recyclerId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huishoucat.manager.pojo.TRelationRecyclerDistrict" >
+    insert into t_relation_recycler_district
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="districtId != null" >
+        district_id,
+      </if>
+      <if test="recyclerId != null" >
+        recycler_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="districtId != null" >
+        #{districtId,jdbcType=BIGINT},
+      </if>
+      <if test="recyclerId != null" >
+        #{recyclerId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.huishoucat.manager.pojo.TRelationRecyclerDistrictExample" resultType="java.lang.Integer" >
+    select count(*) from t_relation_recycler_district
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_relation_recycler_district
+    <set >
+      <if test="record.districtId != null" >
+        district_id = #{record.districtId,jdbcType=BIGINT},
+      </if>
+      <if test="record.recyclerId != null" >
+        recycler_id = #{record.recyclerId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_relation_recycler_district
+    set district_id = #{record.districtId,jdbcType=BIGINT},
+      recycler_id = #{record.recyclerId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huishoucat.manager.pojo.TRelationRecyclerDistrict" >
+    update t_relation_recycler_district
+    <set >
+      <if test="recyclerId != null" >
+        recycler_id = #{recyclerId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where district_id = #{districtId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huishoucat.manager.pojo.TRelationRecyclerDistrict" >
+    update t_relation_recycler_district
+    set recycler_id = #{recyclerId,jdbcType=BIGINT}
+    where district_id = #{districtId,jdbcType=BIGINT}
+  </update>
+</mapper>

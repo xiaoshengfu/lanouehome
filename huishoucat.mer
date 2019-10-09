@@ -1,0 +1,1123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ERDiagram version="1.1">
+  <Connection session="huishoucat" database="huishoucat" />
+  <Drawing gridVisible="false" snapOn="false" fastRouting="false" labelsVisible="true" />
+  <Tables>
+    <Table name="t_bulletin">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="bulletin_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="bulletin_title" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="50" />
+        </Column>
+        <Column name="bulletin_content" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TEXT" size="65535" />
+        </Column>
+        <Column name="sort" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_category">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="category_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="parent_id" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="50" />
+        </Column>
+        <Column name="state" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="sort_order" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="is_parent" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_content">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="content_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="category_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="title" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="200" />
+        </Column>
+        <Column name="sub_title" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="100" />
+        </Column>
+        <Column name="title_desc" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="500" />
+        </Column>
+        <Column name="url" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="300" />
+        </Column>
+        <Column name="pic" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="200" />
+        </Column>
+        <Column name="pic2" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="200" />
+        </Column>
+        <Column name="content" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="TEXT" size="65535" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_district">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="district_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="parent_id" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="district_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="200" />
+        </Column>
+        <Column name="short_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="200" />
+        </Column>
+        <Column name="longitude" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="DECIMAL" size="10,7" />
+        </Column>
+        <Column name="latitude" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="DECIMAL" size="10,7" />
+        </Column>
+        <Column name="level" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="sort" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_function">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="function_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="100" />
+        </Column>
+        <Column name="code" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="100" />
+        </Column>
+        <Column name="url" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="300" />
+        </Column>
+        <Column name="system_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="is_parent" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="parent_id" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_item_desc">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="item_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="100" />
+        </Column>
+        <Column name="price" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="description" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="TEXT" size="65535" />
+        </Column>
+        <Column name="picture_url" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="300" />
+        </Column>
+        <Column name="stock" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="state" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_manager">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="manager_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="job_number" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="password" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="32" />
+        </Column>
+        <Column name="telephone" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="11" />
+        </Column>
+        <Column name="name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="10" />
+        </Column>
+        <Column name="sex" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="picture_url" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="300" />
+        </Column>
+        <Column name="state" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="is_delete" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_notification">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="notification_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="user_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="notification_content" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="300" />
+        </Column>
+        <Column name="level" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="is_read" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="is_delete" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_organize">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="organize_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="100" />
+        </Column>
+        <Column name="code" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="100" />
+        </Column>
+        <Column name="describe" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="500" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_point_order">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="point_order_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="user_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="item_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="user_address_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="message" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="100" />
+        </Column>
+        <Column name="courier_number" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="state" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="price" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="end_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_recycler">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="recycler_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="telephone" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="11" />
+        </Column>
+        <Column name="password" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="32" />
+        </Column>
+        <Column name="openid" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="28" />
+        </Column>
+        <Column name="name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="10" />
+        </Column>
+        <Column name="id_num" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="18" />
+        </Column>
+        <Column name="sex" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="payment_password" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="32" />
+        </Column>
+        <Column name="address" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="300" />
+        </Column>
+        <Column name="picture_url" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="300" />
+        </Column>
+        <Column name="state" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_relation_manager_role">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="manager_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="role_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_relation_recycler_district">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="district_id" primary_key="true" foreign_key="true" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="recycler_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_relation_role_function">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="role_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="function_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_role">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="role_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="100" />
+        </Column>
+        <Column name="code" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="100" />
+        </Column>
+        <Column name="organize_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="information" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="500" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="DATETIME" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_system">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="system_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="100" />
+        </Column>
+        <Column name="code" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="100" />
+        </Column>
+        <Column name="root_url" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="300" />
+        </Column>
+        <Column name="state" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_user_address">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="user_address_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="user_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="telephone" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="11" />
+        </Column>
+        <Column name="name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="10" />
+        </Column>
+        <Column name="sex" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="district_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="district_name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="100" />
+        </Column>
+        <Column name="address" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="200" />
+        </Column>
+        <Column name="state" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_user_balance">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="user_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="balance" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="total_income" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="total_outlay" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_user_points_details">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="points_detail_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="user_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="source" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="type" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="num" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_user_points">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="user_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="points" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="total_income" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="total_outlay" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_user_transaction_details">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="transaction_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="user_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="source" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="type" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="num" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_user">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="user_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="telephone" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="11" />
+        </Column>
+        <Column name="password" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="32" />
+        </Column>
+        <Column name="payment_password" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="32" />
+        </Column>
+        <Column name="openid" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="28" />
+        </Column>
+        <Column name="name" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="10" />
+        </Column>
+        <Column name="sex" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="state" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="DATETIME" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_waste_attribute">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="waste_attribute_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="waste_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="attribute_content" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="TEXT" size="65535" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_waste_order_item">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="order_item_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="waste_order_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="waste_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="description" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="300" />
+        </Column>
+        <Column name="unit_point" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="attribute_price" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="estimate_unit_price" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="real_unit_price" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="estimate_num" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="real_num" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="unit" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_waste_order">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="waste_order_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="user_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="recycler_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="reserve_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="user_address_id" primary_key="false" foreign_key="true" required="false" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="message" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="200" />
+        </Column>
+        <Column name="estimate_price" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="real_price" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="estimate_point" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="real_point" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="state" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="confirm_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="pay_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="end_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="invalid_time" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="invalid_reason" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="VARCHAR" size="200" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_waste_price">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="waste_price_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="waste_id" primary_key="false" foreign_key="true" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="price_ceiling" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="price_floor" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="unit" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+    <Table name="t_waste">
+      <Drawing expanded="true" />
+      <Columns>
+        <Column name="waste_id" primary_key="true" foreign_key="false" required="true" unique="true">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="parent_id" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="name" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="50" />
+        </Column>
+        <Column name="level" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="description" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="TEXT" size="65535" />
+        </Column>
+        <Column name="unit_point" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="BIGINT" size="19" />
+        </Column>
+        <Column name="is_parent" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="is_deleted" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="BIT" />
+        </Column>
+        <Column name="picture_url" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="VARCHAR" size="300" />
+        </Column>
+        <Column name="sort" primary_key="false" foreign_key="false" required="false" unique="false">
+          <Data type="INT" size="10" />
+        </Column>
+        <Column name="create_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+        <Column name="update_time" primary_key="false" foreign_key="false" required="true" unique="false">
+          <Data type="TIMESTAMP" size="19" />
+        </Column>
+      </Columns>
+    </Table>
+  </Tables>
+  <Relationships>
+    <Relationship name="fk_category_content">
+      <Details primary_table="t_category" foreign_table="t_content">
+        <PrimaryKeys>
+          <ColumnName name="category_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="category_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_systrem_function">
+      <Details primary_table="t_system" foreign_table="t_function">
+        <PrimaryKeys>
+          <ColumnName name="system_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="system_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_user_system_notification">
+      <Details primary_table="t_user" foreign_table="t_notification">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_user_points_order">
+      <Details primary_table="t_user" foreign_table="t_point_order">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_point_order_user_address">
+      <Details primary_table="t_user_address" foreign_table="t_point_order">
+        <PrimaryKeys>
+          <ColumnName name="user_address_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="user_address_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_item_desc_points_order">
+      <Details primary_table="t_item_desc" foreign_table="t_point_order">
+        <PrimaryKeys>
+          <ColumnName name="item_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="item_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_relation_manager">
+      <Details primary_table="t_manager" foreign_table="t_relation_manager_role">
+        <PrimaryKeys>
+          <ColumnName name="manager_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="manager_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_relation_role_2">
+      <Details primary_table="t_role" foreign_table="t_relation_manager_role">
+        <PrimaryKeys>
+          <ColumnName name="role_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="role_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_relation_recycle_recycler_id">
+      <Details primary_table="t_recycler" foreign_table="t_relation_recycler_district">
+        <PrimaryKeys>
+          <ColumnName name="recycler_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="recycler_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_relation_recycle_district_id">
+      <Details primary_table="t_district" foreign_table="t_relation_recycler_district">
+        <PrimaryKeys>
+          <ColumnName name="district_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="district_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_relation_function">
+      <Details primary_table="t_function" foreign_table="t_relation_role_function">
+        <PrimaryKeys>
+          <ColumnName name="function_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="function_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_relation_role_1">
+      <Details primary_table="t_role" foreign_table="t_relation_role_function">
+        <PrimaryKeys>
+          <ColumnName name="role_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="role_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_organize_role">
+      <Details primary_table="t_organize" foreign_table="t_role">
+        <PrimaryKeys>
+          <ColumnName name="organize_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="organize_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_user_address_user">
+      <Details primary_table="t_user" foreign_table="t_user_address">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_user_address_district">
+      <Details primary_table="t_district" foreign_table="t_user_address">
+        <PrimaryKeys>
+          <ColumnName name="district_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="district_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_user_user_points_details">
+      <Details primary_table="t_user" foreign_table="t_user_points_details">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_user_user_transaction_details">
+      <Details primary_table="t_user" foreign_table="t_user_transaction_details">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_waste_attribute_waste_id">
+      <Details primary_table="t_waste" foreign_table="t_waste_attribute">
+        <PrimaryKeys>
+          <ColumnName name="waste_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="waste_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="pk_waste_waste_order_item">
+      <Details primary_table="t_waste" foreign_table="t_waste_order_item">
+        <PrimaryKeys>
+          <ColumnName name="waste_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="waste_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="pk_waste_order_waste_order_item">
+      <Details primary_table="t_waste_order" foreign_table="t_waste_order_item">
+        <PrimaryKeys>
+          <ColumnName name="waste_order_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="waste_order_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_user_waste_order">
+      <Details primary_table="t_user" foreign_table="t_waste_order">
+        <PrimaryKeys>
+          <ColumnName name="user_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="user_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_recycler_waste_order">
+      <Details primary_table="t_recycler" foreign_table="t_waste_order">
+        <PrimaryKeys>
+          <ColumnName name="recycler_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="recycler_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_waste_order_user_address">
+      <Details primary_table="t_user_address" foreign_table="t_waste_order">
+        <PrimaryKeys>
+          <ColumnName name="user_address_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="user_address_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+    <Relationship name="fk_waste_waste_prices">
+      <Details primary_table="t_waste" foreign_table="t_waste_price">
+        <PrimaryKeys>
+          <ColumnName name="waste_id" />
+        </PrimaryKeys>
+        <ForeignKeys>
+          <ColumnName name="waste_id" />
+        </ForeignKeys>
+      </Details>
+      <Drawing routingType="0" />
+    </Relationship>
+  </Relationships>
+</ERDiagram>
+

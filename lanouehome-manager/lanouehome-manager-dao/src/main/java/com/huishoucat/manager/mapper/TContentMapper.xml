@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huishoucat.manager.mapper.TContentMapper">
+	<resultMap id="BaseResultMap" type="com.huishoucat.manager.pojo.TContent">
+		<id column="content_id" property="contentId" jdbcType="BIGINT" />
+		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="sub_title" property="subTitle" jdbcType="VARCHAR" />
+		<result column="title_desc" property="titleDesc" jdbcType="VARCHAR" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="pic" property="pic" jdbcType="VARCHAR" />
+		<result column="pic2" property="pic2" jdbcType="VARCHAR" />
+		<result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.huishoucat.manager.pojo.TContent"
+		extends="BaseResultMap">
+		<result column="content" property="content" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		content_id, category_id, title, sub_title, title_desc, url,
+		pic, pic2,
+		is_deleted,
+		create_time, update_time
+	</sql>
+	<sql id="Blob_Column_List">
+		content
+	</sql>
+	<select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs"
+		parameterType="com.huishoucat.manager.pojo.TContentExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_content
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.huishoucat.manager.pojo.TContentExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from t_content
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_content
+		where content_id = #{contentId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		t_content
+		where content_id = #{contentId,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.huishoucat.manager.pojo.TContentExample">
+		delete from t_content
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.huishoucat.manager.pojo.TContent">
+		insert into t_content
+		(content_id, category_id, title,
+		sub_title, title_desc, url,
+		pic, pic2,
+		is_deleted, create_time,
+		update_time, content)
+		values
+		(#{contentId,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT},
+		#{title,jdbcType=VARCHAR},
+		#{subTitle,jdbcType=VARCHAR},
+		#{titleDesc,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+		#{pic,jdbcType=VARCHAR}, #{pic2,jdbcType=VARCHAR},
+		#{isDeleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.huishoucat.manager.pojo.TContent">
+		<selectKey keyProperty="contentId" resultType="long" order="AFTER">
+			select
+			last_insert_id()
+		</selectKey>
+		insert into t_content
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="contentId != null">
+				content_id,
+			</if>
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="subTitle != null">
+				sub_title,
+			</if>
+			<if test="titleDesc != null">
+				title_desc,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+			<if test="pic != null">
+				pic,
+			</if>
+			<if test="pic2 != null">
+				pic2,
+			</if>
+			<if test="isDeleted != null">
+				is_deleted,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="contentId != null">
+				#{contentId,jdbcType=BIGINT},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="subTitle != null">
+				#{subTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="titleDesc != null">
+				#{titleDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="pic != null">
+				#{pic,jdbcType=VARCHAR},
+			</if>
+			<if test="pic2 != null">
+				#{pic2,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted,jdbcType=BIT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.huishoucat.manager.pojo.TContentExample"
+		resultType="java.lang.Integer">
+		select count(*) from t_content
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update t_content
+		<set>
+			<if test="record.contentId != null">
+				content_id = #{record.contentId,jdbcType=BIGINT},
+			</if>
+			<if test="record.categoryId != null">
+				category_id = #{record.categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="record.title != null">
+				title = #{record.title,jdbcType=VARCHAR},
+			</if>
+			<if test="record.subTitle != null">
+				sub_title = #{record.subTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="record.titleDesc != null">
+				title_desc = #{record.titleDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="record.url != null">
+				url = #{record.url,jdbcType=VARCHAR},
+			</if>
+			<if test="record.pic != null">
+				pic = #{record.pic,jdbcType=VARCHAR},
+			</if>
+			<if test="record.pic2 != null">
+				pic2 = #{record.pic2,jdbcType=VARCHAR},
+			</if>
+			<if test="record.isDeleted != null">
+				is_deleted = #{record.isDeleted,jdbcType=BIT},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.content != null">
+				content = #{record.content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExampleWithBLOBs" parameterType="map">
+		update t_content
+		set content_id = #{record.contentId,jdbcType=BIGINT},
+		category_id = #{record.categoryId,jdbcType=BIGINT},
+		title =
+		#{record.title,jdbcType=VARCHAR},
+		sub_title =
+		#{record.subTitle,jdbcType=VARCHAR},
+		title_desc =
+		#{record.titleDesc,jdbcType=VARCHAR},
+		url =
+		#{record.url,jdbcType=VARCHAR},
+		pic = #{record.pic,jdbcType=VARCHAR},
+		pic2 = #{record.pic2,jdbcType=VARCHAR},
+		is_deleted =
+		#{record.isDeleted,jdbcType=BIT},
+		create_time =
+		#{record.createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{record.updateTime,jdbcType=TIMESTAMP},
+		content =
+		#{record.content,jdbcType=LONGVARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update t_content
+		set content_id = #{record.contentId,jdbcType=BIGINT},
+		category_id = #{record.categoryId,jdbcType=BIGINT},
+		title =
+		#{record.title,jdbcType=VARCHAR},
+		sub_title =
+		#{record.subTitle,jdbcType=VARCHAR},
+		title_desc =
+		#{record.titleDesc,jdbcType=VARCHAR},
+		url =
+		#{record.url,jdbcType=VARCHAR},
+		pic = #{record.pic,jdbcType=VARCHAR},
+		pic2 = #{record.pic2,jdbcType=VARCHAR},
+		is_deleted =
+		#{record.isDeleted,jdbcType=BIT},
+		create_time =
+		#{record.createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.huishoucat.manager.pojo.TContent">
+		update t_content
+		<set>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=BIGINT},
+			</if>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="subTitle != null">
+				sub_title = #{subTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="titleDesc != null">
+				title_desc = #{titleDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				url = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="pic != null">
+				pic = #{pic,jdbcType=VARCHAR},
+			</if>
+			<if test="pic2 != null">
+				pic2 = #{pic2,jdbcType=VARCHAR},
+			</if>
+			<if test="isDeleted != null">
+				is_deleted = #{isDeleted,jdbcType=BIT},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where content_id = #{contentId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huishoucat.manager.pojo.TContent">
+		update
+		t_content
+		set category_id = #{categoryId,jdbcType=BIGINT},
+		title =
+		#{title,jdbcType=VARCHAR},
+		sub_title = #{subTitle,jdbcType=VARCHAR},
+		title_desc = #{titleDesc,jdbcType=VARCHAR},
+		url =
+		#{url,jdbcType=VARCHAR},
+		pic = #{pic,jdbcType=VARCHAR},
+		pic2 =
+		#{pic2,jdbcType=VARCHAR},
+		is_deleted = #{isDeleted,jdbcType=BIT},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP},
+		content =
+		#{content,jdbcType=LONGVARCHAR}
+		where content_id =
+		#{contentId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.huishoucat.manager.pojo.TContent">
+		update t_content
+		set category_id = #{categoryId,jdbcType=BIGINT},
+		title =
+		#{title,jdbcType=VARCHAR},
+		sub_title = #{subTitle,jdbcType=VARCHAR},
+		title_desc = #{titleDesc,jdbcType=VARCHAR},
+		url =
+		#{url,jdbcType=VARCHAR},
+		pic = #{pic,jdbcType=VARCHAR},
+		pic2 =
+		#{pic2,jdbcType=VARCHAR},
+		is_deleted = #{isDeleted,jdbcType=BIT},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP}
+		where content_id =
+		#{contentId,jdbcType=BIGINT}
+	</update>
+</mapper>

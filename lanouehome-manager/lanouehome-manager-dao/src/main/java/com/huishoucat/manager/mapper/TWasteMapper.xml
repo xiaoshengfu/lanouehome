@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huishoucat.manager.mapper.TWasteMapper">
+	<resultMap id="BaseResultMap" type="com.huishoucat.manager.pojo.TWaste">
+		<id column="waste_id" property="wasteId" jdbcType="BIGINT" />
+		<result column="parent_id" property="parentId" jdbcType="BIGINT" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="level" property="level" jdbcType="INTEGER" />
+		<result column="unit_point" property="unitPoint" jdbcType="BIGINT" />
+		<result column="is_parent" property="isParent" jdbcType="BIT" />
+		<result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+		<result column="picture_url" property="pictureUrl" jdbcType="VARCHAR" />
+		<result column="sort" property="sort" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.huishoucat.manager.pojo.TWaste"
+		extends="BaseResultMap">
+		<result column="description" property="description" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		waste_id, parent_id, name, level, unit_point, is_parent,
+		is_deleted,
+		picture_url,
+		sort, create_time, update_time
+	</sql>
+	<sql id="Blob_Column_List">
+		description
+	</sql>
+	<select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs"
+		parameterType="com.huishoucat.manager.pojo.TWasteExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_waste
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.huishoucat.manager.pojo.TWasteExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from t_waste
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_waste
+		where waste_id = #{wasteId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		t_waste
+		where waste_id = #{wasteId,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.huishoucat.manager.pojo.TWasteExample">
+		delete from t_waste
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.huishoucat.manager.pojo.TWaste">
+		insert into t_waste (waste_id,
+		parent_id, name,
+		level, unit_point, is_parent,
+		is_deleted, picture_url,
+		sort,
+		create_time, update_time, description
+		)
+		values
+		(#{wasteId,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT},
+		#{name,jdbcType=VARCHAR},
+		#{level,jdbcType=INTEGER},
+		#{unitPoint,jdbcType=BIGINT}, #{isParent,jdbcType=BIT},
+		#{isDeleted,jdbcType=BIT}, #{pictureUrl,jdbcType=VARCHAR},
+		#{sort,jdbcType=INTEGER},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.huishoucat.manager.pojo.TWaste">
+		<selectKey keyProperty="wasteId" resultType="long" order="AFTER">
+			select
+			last_insert_id()
+		</selectKey>
+		insert into t_waste
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="wasteId != null">
+				waste_id,
+			</if>
+			<if test="parentId != null">
+				parent_id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="level != null">
+				level,
+			</if>
+			<if test="unitPoint != null">
+				unit_point,
+			</if>
+			<if test="isParent != null">
+				is_parent,
+			</if>
+			<if test="isDeleted != null">
+				is_deleted,
+			</if>
+			<if test="pictureUrl != null">
+				picture_url,
+			</if>
+			<if test="sort != null">
+				sort,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="wasteId != null">
+				#{wasteId,jdbcType=BIGINT},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=BIGINT},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="level != null">
+				#{level,jdbcType=INTEGER},
+			</if>
+			<if test="unitPoint != null">
+				#{unitPoint,jdbcType=BIGINT},
+			</if>
+			<if test="isParent != null">
+				#{isParent,jdbcType=BIT},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted,jdbcType=BIT},
+			</if>
+			<if test="pictureUrl != null">
+				#{pictureUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="sort != null">
+				#{sort,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.huishoucat.manager.pojo.TWasteExample"
+		resultType="java.lang.Integer">
+		select count(*) from t_waste
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update t_waste
+		<set>
+			<if test="record.wasteId != null">
+				waste_id = #{record.wasteId,jdbcType=BIGINT},
+			</if>
+			<if test="record.parentId != null">
+				parent_id = #{record.parentId,jdbcType=BIGINT},
+			</if>
+			<if test="record.name != null">
+				name = #{record.name,jdbcType=VARCHAR},
+			</if>
+			<if test="record.level != null">
+				level = #{record.level,jdbcType=INTEGER},
+			</if>
+			<if test="record.unitPoint != null">
+				unit_point = #{record.unitPoint,jdbcType=BIGINT},
+			</if>
+			<if test="record.isParent != null">
+				is_parent = #{record.isParent,jdbcType=BIT},
+			</if>
+			<if test="record.isDeleted != null">
+				is_deleted = #{record.isDeleted,jdbcType=BIT},
+			</if>
+			<if test="record.pictureUrl != null">
+				picture_url = #{record.pictureUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sort != null">
+				sort = #{record.sort,jdbcType=INTEGER},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.description != null">
+				description = #{record.description,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExampleWithBLOBs" parameterType="map">
+		update t_waste
+		set waste_id = #{record.wasteId,jdbcType=BIGINT},
+		parent_id = #{record.parentId,jdbcType=BIGINT},
+		name =
+		#{record.name,jdbcType=VARCHAR},
+		level =
+		#{record.level,jdbcType=INTEGER},
+		unit_point =
+		#{record.unitPoint,jdbcType=BIGINT},
+		is_parent =
+		#{record.isParent,jdbcType=BIT},
+		is_deleted =
+		#{record.isDeleted,jdbcType=BIT},
+		picture_url =
+		#{record.pictureUrl,jdbcType=VARCHAR},
+		sort =
+		#{record.sort,jdbcType=INTEGER},
+		create_time =
+		#{record.createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{record.updateTime,jdbcType=TIMESTAMP},
+		description =
+		#{record.description,jdbcType=LONGVARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update t_waste
+		set waste_id = #{record.wasteId,jdbcType=BIGINT},
+		parent_id = #{record.parentId,jdbcType=BIGINT},
+		name =
+		#{record.name,jdbcType=VARCHAR},
+		level =
+		#{record.level,jdbcType=INTEGER},
+		unit_point =
+		#{record.unitPoint,jdbcType=BIGINT},
+		is_parent =
+		#{record.isParent,jdbcType=BIT},
+		is_deleted =
+		#{record.isDeleted,jdbcType=BIT},
+		picture_url =
+		#{record.pictureUrl,jdbcType=VARCHAR},
+		sort =
+		#{record.sort,jdbcType=INTEGER},
+		create_time =
+		#{record.createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.huishoucat.manager.pojo.TWaste">
+		update t_waste
+		<set>
+			<if test="parentId != null">
+				parent_id = #{parentId,jdbcType=BIGINT},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="level != null">
+				level = #{level,jdbcType=INTEGER},
+			</if>
+			<if test="unitPoint != null">
+				unit_point = #{unitPoint,jdbcType=BIGINT},
+			</if>
+			<if test="isParent != null">
+				is_parent = #{isParent,jdbcType=BIT},
+			</if>
+			<if test="isDeleted != null">
+				is_deleted = #{isDeleted,jdbcType=BIT},
+			</if>
+			<if test="pictureUrl != null">
+				picture_url = #{pictureUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="sort != null">
+				sort = #{sort,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where waste_id = #{wasteId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huishoucat.manager.pojo.TWaste">
+		update
+		t_waste
+		set parent_id = #{parentId,jdbcType=BIGINT},
+		name =
+		#{name,jdbcType=VARCHAR},
+		level = #{level,jdbcType=INTEGER},
+		unit_point
+		= #{unitPoint,jdbcType=BIGINT},
+		is_parent = #{isParent,jdbcType=BIT},
+		is_deleted = #{isDeleted,jdbcType=BIT},
+		picture_url =
+		#{pictureUrl,jdbcType=VARCHAR},
+		sort = #{sort,jdbcType=INTEGER},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP},
+		description =
+		#{description,jdbcType=LONGVARCHAR}
+		where waste_id =
+		#{wasteId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.huishoucat.manager.pojo.TWaste">
+		update t_waste
+		set
+		parent_id = #{parentId,jdbcType=BIGINT},
+		name =
+		#{name,jdbcType=VARCHAR},
+		level = #{level,jdbcType=INTEGER},
+		unit_point
+		= #{unitPoint,jdbcType=BIGINT},
+		is_parent = #{isParent,jdbcType=BIT},
+		is_deleted = #{isDeleted,jdbcType=BIT},
+		picture_url =
+		#{pictureUrl,jdbcType=VARCHAR},
+		sort = #{sort,jdbcType=INTEGER},
+		create_time = #{createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP}
+		where waste_id =
+		#{wasteId,jdbcType=BIGINT}
+	</update>
+</mapper>

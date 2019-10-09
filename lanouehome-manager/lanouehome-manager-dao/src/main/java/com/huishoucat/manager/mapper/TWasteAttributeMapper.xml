@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huishoucat.manager.mapper.TWasteAttributeMapper">
+	<resultMap id="BaseResultMap" type="com.huishoucat.manager.pojo.TWasteAttribute">
+		<id column="waste_attribute_id" property="wasteAttributeId"
+			jdbcType="BIGINT" />
+		<result column="waste_id" property="wasteId" jdbcType="BIGINT" />
+		<result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.huishoucat.manager.pojo.TWasteAttribute"
+		extends="BaseResultMap">
+		<result column="attribute_content" property="attributeContent"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		waste_attribute_id, waste_id, is_deleted, create_time,
+		update_time
+	</sql>
+	<sql id="Blob_Column_List">
+		attribute_content
+	</sql>
+	<select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs"
+		parameterType="com.huishoucat.manager.pojo.TWasteAttributeExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_waste_attribute
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.huishoucat.manager.pojo.TWasteAttributeExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from t_waste_attribute
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from t_waste_attribute
+		where waste_attribute_id =
+		#{wasteAttributeId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		t_waste_attribute
+		where waste_attribute_id =
+		#{wasteAttributeId,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.huishoucat.manager.pojo.TWasteAttributeExample">
+		delete from t_waste_attribute
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.huishoucat.manager.pojo.TWasteAttribute">
+		insert into t_waste_attribute
+		(waste_attribute_id, waste_id,
+		is_deleted,
+		create_time, update_time,
+		attribute_content
+		)
+		values (#{wasteAttributeId,jdbcType=BIGINT},
+		#{wasteId,jdbcType=BIGINT},
+		#{isDeleted,jdbcType=BIT},
+		#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+		#{attributeContent,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.huishoucat.manager.pojo.TWasteAttribute">
+		<selectKey keyProperty="wasteAttributeId" resultType="long"
+			order="AFTER">
+			select
+			last_insert_id()
+		</selectKey>
+		insert into t_waste_attribute
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="wasteAttributeId != null">
+				waste_attribute_id,
+			</if>
+			<if test="wasteId != null">
+				waste_id,
+			</if>
+			<if test="isDeleted != null">
+				is_deleted,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="attributeContent != null">
+				attribute_content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="wasteAttributeId != null">
+				#{wasteAttributeId,jdbcType=BIGINT},
+			</if>
+			<if test="wasteId != null">
+				#{wasteId,jdbcType=BIGINT},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted,jdbcType=BIT},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="attributeContent != null">
+				#{attributeContent,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.huishoucat.manager.pojo.TWasteAttributeExample"
+		resultType="java.lang.Integer">
+		select count(*) from t_waste_attribute
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update t_waste_attribute
+		<set>
+			<if test="record.wasteAttributeId != null">
+				waste_attribute_id =
+				#{record.wasteAttributeId,jdbcType=BIGINT},
+			</if>
+			<if test="record.wasteId != null">
+				waste_id = #{record.wasteId,jdbcType=BIGINT},
+			</if>
+			<if test="record.isDeleted != null">
+				is_deleted = #{record.isDeleted,jdbcType=BIT},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.attributeContent != null">
+				attribute_content =
+				#{record.attributeContent,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExampleWithBLOBs" parameterType="map">
+		update t_waste_attribute
+		set waste_attribute_id =
+		#{record.wasteAttributeId,jdbcType=BIGINT},
+		waste_id =
+		#{record.wasteId,jdbcType=BIGINT},
+		is_deleted =
+		#{record.isDeleted,jdbcType=BIT},
+		create_time =
+		#{record.createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{record.updateTime,jdbcType=TIMESTAMP},
+		attribute_content =
+		#{record.attributeContent,jdbcType=LONGVARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update t_waste_attribute
+		set waste_attribute_id =
+		#{record.wasteAttributeId,jdbcType=BIGINT},
+		waste_id =
+		#{record.wasteId,jdbcType=BIGINT},
+		is_deleted =
+		#{record.isDeleted,jdbcType=BIT},
+		create_time =
+		#{record.createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.huishoucat.manager.pojo.TWasteAttribute">
+		update t_waste_attribute
+		<set>
+			<if test="wasteId != null">
+				waste_id = #{wasteId,jdbcType=BIGINT},
+			</if>
+			<if test="isDeleted != null">
+				is_deleted = #{isDeleted,jdbcType=BIT},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="attributeContent != null">
+				attribute_content =
+				#{attributeContent,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where waste_attribute_id = #{wasteAttributeId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huishoucat.manager.pojo.TWasteAttribute">
+		update
+		t_waste_attribute
+		set waste_id = #{wasteId,jdbcType=BIGINT},
+		is_deleted
+		= #{isDeleted,jdbcType=BIT},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP},
+		attribute_content =
+		#{attributeContent,jdbcType=LONGVARCHAR}
+		where waste_attribute_id =
+		#{wasteAttributeId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.huishoucat.manager.pojo.TWasteAttribute">
+		update
+		t_waste_attribute
+		set waste_id = #{wasteId,jdbcType=BIGINT},
+		is_deleted
+		= #{isDeleted,jdbcType=BIT},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP},
+		update_time =
+		#{updateTime,jdbcType=TIMESTAMP}
+		where waste_attribute_id =
+		#{wasteAttributeId,jdbcType=BIGINT}
+	</update>
+</mapper>
